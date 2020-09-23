@@ -43,6 +43,17 @@ module Bitly
         new(data: response.body, client: client, response: response)
       end
 
+      def self.custom_shorten(custom_url:, bitlink_id:)
+        response = client.request(
+          path: "/custom_bitlinks",
+          method: "POST",
+          params: {
+            "custom_bitlink" => custom_url,
+            "bitlink_id" => bitlink_id,
+          })
+        new(data: response.body, client: client, response: response)
+      end
+
       ##
       # Creates a new Bitlink from a long URL. Similar to #shorten but takes
       # more parameters.
